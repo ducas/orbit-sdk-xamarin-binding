@@ -1,7 +1,7 @@
 ﻿using System;
+using UIKit;
 using Foundation;
 using ObjCRuntime;
-using UIKit;
 
 namespace OrbitSdk.iOS
 {
@@ -19,12 +19,12 @@ namespace OrbitSdk.iOS
     // @protocol OrbitAppearance <NSObject>
     [Protocol, Model]
     [BaseType(typeof(NSObject))]
-    interface IOrbitAppearance
+    interface OrbitAppearance
     {
         // @required +(instancetype)orbitAppearance;
         [Abstract]
         [Export("orbitAppearance")]
-        IOrbitAppearance OrbitAppearance();
+        OrbitAppearance OAppearance();
     }
 
     // @interface OrbitViewController : UINavigationController
@@ -178,19 +178,16 @@ namespace OrbitSdk.iOS
         // +(NSString *)sdkVersion;
         [Static]
         [Export("sdkVersion")]
-        //[Verify(MethodToProperty)]
         string SdkVersion { get; }
 
         // +(NSString *)sdkBuildDate;
         [Static]
         [Export("sdkBuildDate")]
-        //[Verify(MethodToProperty)]
         string SdkBuildDate { get; }
 
         // +(NSArray *)getSupportedCountries;
         [Static]
         [Export("getSupportedCountries")]
-        //[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] SupportedCountries { get; }
 
         // +(NSString *)getCountryDisplayName:(NSString *)country;
@@ -201,13 +198,11 @@ namespace OrbitSdk.iOS
         // +(NSArray *)getSupportedDocumentTypesWithCountry:(NSString *)country;
         [Static]
         [Export("getSupportedDocumentTypesWithCountry:")]
-        //[Verify(StronglyTypedNSArray)]
         NSObject[] GetSupportedDocumentTypesWithCountry(string country);
 
         // +(NSArray *)getSupportedDocumentTypes;
         [Static]
         [Export("getSupportedDocumentTypes")]
-        //[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] SupportedDocumentTypes { get; }
 
         // +(NSString *)getDocumentTypeDisplayName:(NSString *)docType;
@@ -228,7 +223,6 @@ namespace OrbitSdk.iOS
         // +(NSArray *)getSupportedDateFormats;
         [Static]
         [Export("getSupportedDateFormats")]
-        //[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
         NSObject[] SupportedDateFormats { get; }
 
         // +(NSString *)getDateFormatDisplayName:(NSString *)dateFormat;
@@ -239,7 +233,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitBackButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitBackButton : IOrbitAppearance
+    interface OrbitBackButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * image __attribute__((annotate("ui_appearance_selector")));
         [Export("image", ArgumentSemantic.Strong)]
@@ -248,13 +242,13 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitButtonBar : UIView <OrbitAppearance>
     [BaseType(typeof(UIView))]
-    interface OrbitButtonBar : IOrbitAppearance
+    interface OrbitButtonBar : OrbitAppearance
     {
     }
 
     // @interface OrbitCameraButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitCameraButton : IOrbitAppearance
+    interface OrbitCameraButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * image __attribute__((annotate("ui_appearance_selector")));
         [Export("image", ArgumentSemantic.Strong)]
@@ -263,13 +257,13 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitCapturePreviewBackgroundView : UIView <OrbitAppearance>
     [BaseType(typeof(UIView))]
-    interface OrbitCapturePreviewBackgroundView : IOrbitAppearance
+    interface OrbitCapturePreviewBackgroundView : OrbitAppearance
     {
     }
 
     // @interface OrbitFRStartButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitFRStartButton : IOrbitAppearance
+    interface OrbitFRStartButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIFont * titleFont __attribute__((annotate("ui_appearance_selector")));
         [Export("titleFont", ArgumentSemantic.Strong)]
@@ -278,7 +272,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitFlashButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitFlashButton : IOrbitAppearance
+    interface OrbitFlashButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * flashOnImage __attribute__((annotate("ui_appearance_selector")));
         [Export("flashOnImage", ArgumentSemantic.Strong)]
@@ -291,7 +285,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitHelpButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitHelpButton : IOrbitAppearance
+    interface OrbitHelpButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * image __attribute__((annotate("ui_appearance_selector")));
         [Export("image", ArgumentSemantic.Strong)]
@@ -308,13 +302,13 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitInfoBar : UIView <OrbitAppearance>
     [BaseType(typeof(UIView))]
-    interface OrbitInfoBar : IOrbitAppearance
+    interface OrbitInfoBar : OrbitAppearance
     {
     }
 
     // @interface OrbitInfoBarLabel : UILabel <OrbitAppearance>
     [BaseType(typeof(UILabel))]
-    interface OrbitInfoBarLabel : IOrbitAppearance
+    interface OrbitInfoBarLabel : OrbitAppearance
     {
         // @property (nonatomic, strong) UIColor * titleColor __attribute__((annotate("ui_appearance_selector")));
         [Export("titleColor", ArgumentSemantic.Strong)]
@@ -327,7 +321,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitMainTitleLabel : UILabel <OrbitAppearance>
     [BaseType(typeof(UILabel))]
-    interface OrbitMainTitleLabel : IOrbitAppearance
+    interface OrbitMainTitleLabel : OrbitAppearance
     {
         // @property (nonatomic, strong) UIColor * titleColor __attribute__((annotate("ui_appearance_selector")));
         [Export("titleColor", ArgumentSemantic.Strong)]
@@ -340,7 +334,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitManualEntryButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitManualEntryButton : IOrbitAppearance
+    interface OrbitManualEntryButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * image __attribute__((annotate("ui_appearance_selector")));
         [Export("image", ArgumentSemantic.Strong)]
@@ -349,7 +343,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitPictureOnlyButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitPictureOnlyButton : IOrbitAppearance
+    interface OrbitPictureOnlyButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * pictureOnlyOnImage __attribute__((annotate("ui_appearance_selector")));
         [Export("pictureOnlyOnImage", ArgumentSemantic.Strong)]
@@ -362,7 +356,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitSettingsButton : UIButton <OrbitAppearance>
     [BaseType(typeof(UIButton))]
-    interface OrbitSettingsButton : IOrbitAppearance
+    interface OrbitSettingsButton : OrbitAppearance
     {
         // @property (nonatomic, strong) UIImage * image __attribute__((annotate("ui_appearance_selector")));
         [Export("image", ArgumentSemantic.Strong)]
@@ -371,7 +365,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitSubTitleLabel : UILabel <OrbitAppearance>
     [BaseType(typeof(UILabel))]
-    interface OrbitSubTitleLabel : IOrbitAppearance
+    interface OrbitSubTitleLabel : OrbitAppearance
     {
         // @property (nonatomic, strong) UIColor * titleColor __attribute__((annotate("ui_appearance_selector")));
         [Export("titleColor", ArgumentSemantic.Strong)]
@@ -384,7 +378,7 @@ namespace OrbitSdk.iOS
 
     // @interface OrbitTitleBar : UIView <OrbitAppearance>
     [BaseType(typeof(UIView))]
-    interface OrbitTitleBar : IOrbitAppearance
+    interface OrbitTitleBar : OrbitAppearance
     {
     }
 }
