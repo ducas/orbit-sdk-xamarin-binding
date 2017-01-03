@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitSdk.iOS", "OrbitSdk.iOS\OrbitSdk.iOS.csproj", "{8D2D6F48-A251-4708-B143-EAFF7E788290}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrbitSdk.iOS.Demo", "OrbitSdk.iOS.Demo\OrbitSdk.iOS.Demo.csproj", "{A29A19DF-5565-42F4-92A0-4585D0185164}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +27,17 @@ Global
 		{8D2D6F48-A251-4708-B143-EAFF7E788290}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8D2D6F48-A251-4708-B143-EAFF7E788290}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{8D2D6F48-A251-4708-B143-EAFF7E788290}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|Any CPU.Build.0 = Release|iPhone
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|iPhone.ActiveCfg = Release|iPhone
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|iPhone.Build.0 = Release|iPhone
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{A29A19DF-5565-42F4-92A0-4585D0185164}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 EndGlobal
