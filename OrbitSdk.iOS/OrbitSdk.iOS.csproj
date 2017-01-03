@@ -44,6 +44,7 @@
     <NativeReference Include="libOrbit.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
+      <LinkerFlags>-lc++ -ObjC</LinkerFlags>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
