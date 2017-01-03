@@ -117,6 +117,7 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScanDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OrbitSdk.iOS\OrbitSdk.iOS.csproj">

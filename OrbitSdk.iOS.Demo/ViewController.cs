@@ -1,13 +1,60 @@
 ﻿using System;
+using System.Linq;
 using Foundation;
 using Newtonsoft.Json;
 using UIKit;
 
 namespace OrbitSdk.iOS.Demo
 {
+    public class PickerItem
+    {
+        public string Title { get; set; }
+
+        public string Id { get; set; }
+    }
+
+    public class PickerItemViewModel : UIPickerViewModel
+    {
+        readonly PickerItem[] data;
+
+        public PickerItemViewModel(PickerItem[] data)
+        {
+            this.data = data;
+
+            SelectedItem = data.FirstOrDefault();
+        }
+
+        public override nint GetComponentCount(UIPickerView pickerView)
+        {
+            return 1;
+        }
+
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+        {
+            return data.Length;
+        }
+
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        {
+            return data[row].Title;
+        }
+
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            SelectedItem = data[row];
+        }
+
+        public PickerItem SelectedItem { get; private set; }
+    }
+
     public partial class ViewController : UIViewController
     {
         NSObject[] docTypes;
+
+        PickerItemViewModel pickerItems;
+
+        ScanDelegate orbitDelegate;
+
 
         protected ViewController(IntPtr handle) : base(handle)
         {
@@ -18,7 +65,16 @@ namespace OrbitSdk.iOS.Demo
         {
             base.ViewDidLoad();
 
-            docTypes = OrbitViewController.GetSupportedDocumentTypesWithCountry("Australia");
+            docTypes = OrbitViewController.SupportedDocumentTypes;
+
+            pickerItems = new PickerItemViewModel(
+                docTypes
+                    .Select(d => new PickerItem { Id = d.ToString(), Title = OrbitViewController.GetDocumentTypeDisplayName(d.ToString()) })
+                    .Where(d => d.Id.StartsWith("AUS", StringComparison.InvariantCultureIgnoreCase))
+                    .ToArray()
+            );
+
+            IdTypePicker.Model = pickerItems;
         }
 
         public override void DidReceiveMemoryWarning()
@@ -28,17 +84,20 @@ namespace OrbitSdk.iOS.Demo
 
         partial void ScanButton_TouchUpInside(UIButton sender)
         {
+            var selectedIdType = pickerItems.SelectedItem.Id;
+
             var parameters = new
             {
                 RequestParam = new object[]
                 {
-                    new { Value = docTypes[0].ToString(), Name = "DocType" },
+                    new { Value = selectedIdType, Name = "DocType" },
                     new { Value = "123129-1239i9023", Name = "SessionID" },
                     new { Value = "1-FDAS04", Name = "CustomerID" },
                 }
             };
 
-            var orbitDelegate = new OrbitDelegate(this);
+            orbitDelegate = new ScanDelegate(this);
+            orbitDelegate.ScanComplete += OrbitDelegate_ScanComplete;
 
             var orbitVC = new OrbitViewController(orbitDelegate)
             {
@@ -50,29 +109,20 @@ namespace OrbitSdk.iOS.Demo
                 FaceMatchFailObscureThreshold = 48f,
                 FaceMatchObscurePassThreshold = 50f,
                 HideSettingsButton = true,
-                HideButtonBar = true,
+                HideManualEntryButton = true,
                 ScanForCardHolderPosition = OrbitScanForCardHolderPosition.All,
                 RequestParam = JsonConvert.SerializeObject(parameters)
             };
 
             PresentViewController(orbitVC, true, null);
         }
-    }
 
-    public class OrbitDelegate : OrbitViewControllerDelegate
-    {
-        readonly ViewController parent;
-
-        public OrbitDelegate(ViewController parent)
+        void OrbitDelegate_ScanComplete(object sender, Demo.ScanCompleteEventArgs e)
         {
-            this.parent = parent;
-        }
+            orbitDelegate.ScanComplete -= OrbitDelegate_ScanComplete;
+            orbitDelegate.Dispose();
 
-        public override void WithDocFrontImage(string response, UIImage docFrontImage, UIImage docBackImage, UIImage cameraFaceImage, OrbitViewController orbitViewController)
-        {
-            parent.DismissViewController(false, () =>
-            {
-            });
+            // TODO: do something with e.Response...
         }
     }
 }

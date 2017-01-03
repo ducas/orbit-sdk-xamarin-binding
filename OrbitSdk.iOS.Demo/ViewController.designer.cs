@@ -13,12 +13,29 @@ namespace OrbitSdk.iOS.Demo
     [Register ("ViewController")]
     partial class ViewController
     {
-        [Action ("UIButton7_TouchUpInside:")]
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIPickerView IdTypePicker { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton ScanButton { get; set; }
+
+        [Action ("ScanButton_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void ScanButton_TouchUpInside (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {
+            if (IdTypePicker != null) {
+                IdTypePicker.Dispose ();
+                IdTypePicker = null;
+            }
+
+            if (ScanButton != null) {
+                ScanButton.Dispose ();
+                ScanButton = null;
+            }
         }
     }
 }
