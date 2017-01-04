@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <version>$version$</version>
+    <authors>ducas</authors>
+    <owners>ducas</owners>
+    <licenseUrl>https://github.com/ducas/orbit-sdk-xamarin-binding/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ducas/orbit-sdk-xamarin-binding</projectUrl>
+    <id>OrbitSdk</id>
+    <title>Orbit SDK</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Xamarin Binding for the Orbit SDK.</description>
+    <copyright>Copyright Ducas Francis © 2017</copyright>
+  </metadata>
+
+  <files>
+    <file src="build/**/*.*" target="lib" />
+  </files>
+</package>
+
